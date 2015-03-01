@@ -1,0 +1,89 @@
+package com.sicsr.programme.adapter;
+
+import java.util.List;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.devfx.controlpanel.R;
+import com.devfx.controlpanel.activity.HomeActivity;
+import com.devfx.controlpanel.dto.NavigationItemDto;
+
+public class NavigationAdapter extends ArrayAdapter<NavigationItemDto> {
+
+
+	private HomeActivity mContext;
+	private List<NavigationItemDto> navigationList;
+
+	public NavigationAdapter(HomeActivity context, int resource,
+			List<NavigationItemDto> objects) {
+		super(context, resource, objects);
+		this.mContext = context;
+		this.navigationList = objects;
+	}
+
+	@Override
+	public int getCount() {
+		return this.navigationList.size();
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		NavigationItemDto navigationItemDto = this.navigationList.get(position);
+
+		if(navigationItemDto.isCategory()){
+
+			convertView = (View) LayoutInflater.from(this.mContext).inflate(R.layout.navigation_drawer_list_item, null);
+
+		}else{
+			convertView = (View) LayoutInflater.from(this.mContext).inflate(R.layout.navigation_drawer_list_item, null);
+			ImageView nav_icon = (ImageView) convertView.findViewById(R.id.nav_icon);
+			TextView  nav_title = (TextView) convertView.findViewById(R.id.nav_title);
+			TextView  nav_extra_amount = (TextView) convertView.findViewById(R.id.nav_extra_amount);
+			nav_icon.setImageDrawable(this.mContext.getResources().getDrawable(navigationItemDto.getDrawableId()));
+			nav_title.setText(navigationItemDto.getTitle());
+			if(navigationItemDto.getExtraCount() != null){
+				nav_extra_amount.setVisibility(View.VISIBLE);
+				nav_extra_amount.setText(String.valueOf(navigationItemDto.getExtraCount()));
+			}else{
+				nav_extra_amount.setVisibility(View.GONE);
+			}
+			convertView.setTag(navigationItemDto);
+			convertView.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					NavigationItemDto navigationItemDto = (NavigationItemDto) v.getTag();
+
+					switch (navigationItemDto.getDrawableId()) {
+
+					case R.drawable.logout:
+						mContext.signOutRequest();
+						break;
+
+					default:
+						break;
+					}
+				}
+			});
+
+
+
+
+		}
+
+
+
+
+		return convertView;
+	}
+
+
+
+
+}

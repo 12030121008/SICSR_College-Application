@@ -1,0 +1,193 @@
+package com.sicsr.programme.dto;
+
+import java.io.Serializable;
+import java.util.Date;
+
+/**
+ * @author Faiyyaz Shaikh
+ *
+ */
+public class UserDto extends BaseDto implements Serializable {
+
+	// private static final String TAG = User.class.getSimpleName();
+	/*
+	 ResultData: {"sessid":"4Cu_15qqSV8uA82-AgjMn1hnbp8LPdaxTgIUskhwF44","session_name":"SSESS37306b541b9acb50db597b1e8371f82b","token":"lKG9nKrlOmb1RwcpcW09hD11y35x66NTAWqgSeq7rkI","user":{"uid":"44","name":"faiyyaz","mail":"faiyyazshaikh2010@gmail.com","theme":"","signature":"","signature_format":"filtered_html","created":"1418506289","access":"1418992208","login":1418992361,"status":"1","timezone":"America/New_York","language":"","picture":null,"init":"faiyyazshaikh2010@gmail.com","data":{"contact":1,"mimemail_textonly":0,"htmlmail_plaintext":0},"roles":{"2":"authenticated user","3":"administrator"},"metatags":[]}}
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Integer uid;
+	private String name;
+	//private String surname;
+
+	private String password;
+	private String email;
+	private String mobile;
+	private Integer status;
+	private Date created;
+	private Date modified;
+
+	private String session_name;
+	private String sessid;
+	private String token;
+	private String access;
+	private String picture;
+
+	public UserDto() {
+	}
+
+	/*public static ArrayList<UserDto> populateFromCursor(Cursor cursor) {
+		ArrayList<UserDto> userDtoList = new ArrayList<UserDto>();
+		if (cursor.moveToFirst()) {
+			do {
+				UserDto userDto = new UserDto();
+				userDto.setId(cursor.getInt(0));
+				userDto.setName(cursor.getString(1));
+			//	userDto.setSurname(cursor.getString(2));
+				userDto.setUsername(cursor.getString(3));
+				userDto.setEmail(cursor.getString(3));
+				userDto.setMobile(cursor.getString(4));
+				userDto.setPassword(cursor.getString(5));
+				userDto.setStatus(cursor.getInt(6));
+				userDto.setGradeId(cursor.getInt(12));
+				userDtoList.add(userDto);
+			} while (cursor.moveToNext());
+		}
+
+		return userDtoList;
+	}*/
+
+	public Integer getId() {
+		return uid;
+	}
+
+	public void setId(Integer id) {
+		this.uid = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/*public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}*/
+
+
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+
+	public Date getModified() {
+		return modified;
+	}
+
+	public void setModified(Date modified) {
+		this.modified = modified;
+	}
+
+
+	public enum Parameter {
+
+		USER_ID("uid"), NAME("name"),EMAIL("mail"),
+		CONTACT("contact"),PASSWORD("password"),
+		MODEL_DATA("data");
+
+		private String parameterName;
+
+		private Parameter(String parameterName) {
+			this.parameterName = parameterName;
+		}
+
+		public String getParameterName() {
+			return this.parameterName;
+		}
+	}
+
+
+	public String getSession_name() {
+		return session_name;
+	}
+
+	public void setSession_name(String session_name) {
+		this.session_name = session_name;
+	}
+
+	public String getSessid() {
+		return sessid;
+	}
+
+	public void setSessid(String sessid) {
+		this.sessid = sessid;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public String getAccess() {
+		return access;
+	}
+
+	public void setAccess(String access) {
+		this.access = access;
+	}
+
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+
+}

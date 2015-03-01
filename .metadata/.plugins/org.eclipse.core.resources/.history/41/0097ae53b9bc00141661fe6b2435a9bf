@@ -1,0 +1,25 @@
+package com.sicsr.programme.database.dao;
+
+import biz.cytrus.lightbulb.activity.BaseActivity;
+import biz.cytrus.lightbulb.database.DbAdapter;
+
+public class BaseDao {
+
+	private BaseActivity initActivity;
+
+	public BaseDao(BaseActivity initActivity) {
+		this.initActivity = initActivity;
+	}
+
+	public BaseActivity getInitActivity() {
+		return initActivity;
+	}
+
+	public void setInitActivity(BaseActivity initActivity) {
+		this.initActivity = initActivity;
+	}
+
+	public DbAdapter getDbAdapter() {
+		return initActivity.getLightbulbApplication().getDbAdapter();
+	}
+}

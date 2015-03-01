@@ -1,0 +1,46 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fs_background_green" >
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayoutAccountsList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/fs_background_green" >
+
+          <android.support.v7.widget.RecyclerView
+            android:id="@+id/cardList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cacheColorHint="@android:color/transparent"
+            android:choiceMode="singleChoice"
+            android:clickable="true"
+            android:clipToPadding="false"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="2.0dip"
+            android:fadingEdge="none"
+            android:paddingBottom="@dimen/fragment_margin"
+            android:paddingLeft="@dimen/fragment_margin"
+            android:paddingRight="@dimen/fragment_margin"
+            android:paddingTop="@dimen/fragment_margin"
+            android:scrollbarStyle="outsideOverlay"
+            android:visibility="gone" />
+        
+        
+      
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="36dp"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="65" />
+
+</RelativeLayout>

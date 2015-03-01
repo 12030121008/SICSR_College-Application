@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res/com.devfx.controlpanel"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/app_background" >
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <!-- The main content view -->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#ffffff"
+            android:orientation="vertical" >
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/fs_background_light_green" >
+            </android.support.v7.widget.Toolbar>
+
+            <RelativeLayout
+                android:id="@+id/fragment_home_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <!-- The navigation drawer -->
+
+        <RelativeLayout
+            android:id="@+id/navigation_drawer_container"
+            android:layout_width="@dimen/navigationslider_width"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/fs_white" >
+
+            <!--
+                 <android.support.v7.widget.SwitchCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            -->
+        </RelativeLayout>
+    </android.support.v4.widget.DrawerLayout>
+
+</RelativeLayout>

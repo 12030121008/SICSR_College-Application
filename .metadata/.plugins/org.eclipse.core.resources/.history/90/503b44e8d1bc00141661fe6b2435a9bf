@@ -1,0 +1,88 @@
+package com.sicsr.programme.adapter;
+
+import java.util.List;
+
+import android.database.Cursor;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+
+import com.sicsr.programme.R;
+import com.sicsr.programme.dto.UnitDto;
+import com.sicsr.programme.dto.UnitDto;
+import com.sicsr.programme.fragment.SubjectListFragment;
+import com.sicsr.programme.viewholder.UnitsVimport com.sicsr.programme.viewholder.UnitsViewHolder;
+iewHolder;
+
+public class UnitAdapter extends RecyclerView.Adapter<UnitsVimport com.sicsr.programme.viewholder.UnitsViewHolder;
+iewHolder> {
+
+	private static final int ADAPTER_MODE_API = 1;
+	private static final int ADAPTER_MODE_DATABASE = 2;
+	private Cursor contentItemCursor;
+	private int adapterMode;
+
+
+	private SubjectListFragment mContext;
+	private List<UnitDto> subjectDtos;
+
+	public UnitAdapter(SubjectListFragment mContext, List<UnitDto> semesterDtos) {
+		this.mContext = mContext;
+		this.subjectDtos = semesterDtos;
+	}
+
+	public UnitAdapter(SubjectListFragment context, Cursor contentItemCursor) {
+		this.mContext = context;
+		this.contentItemCursor = contentItemCursor;
+		this.adapterMode = ADAPTER_MODE_DATABASE;
+	}
+
+	@Override
+	public int getItemCount() {
+		if (this.adapterMode == ADAPTER_MODE_API) {
+			return subjectDtos.size();
+		} else {
+			return contentItemCursor.getCount();
+		}
+	}
+
+	@Override
+	public void onBindViewHolder(UnitsVimport com.sicsr.programme.viewholder.UnitsViewHolder;
+iewHolder holder, int position) {
+
+		UnitDto subjectDto = null;
+
+		if (this.adapterMode == ADAPTER_MODE_API) {
+			subjectDto = subjectDtos.get(position);
+		} else {
+			contentItemCursor.moveToPosition(position);
+			subjectDto = new UnitDto(contentItemCursor);
+		}
+		holder.branch_name.setText(subjectDto.getName());
+		holder.wrapper.setTag(subjectDto);
+		holder.wrapper.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				/*SemesterDto semesterDto = (SemesterDto) v.getTag();
+				HomeActivity activity = (HomeActivity) mContext.getActivity();
+				Bundle bundle = new Bundle();
+				bundle.putInt("id", semesterDto.getId());
+				activity.addFragmentMain(new BranchesListFragment(), bundle);*/
+			}
+		});
+	}
+
+	@Override
+	public UnitsVimport com.sicsr.programme.viewholder.UnitsViewHolder;
+iewHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
+		View itemView = LayoutInflater.
+				from(viewGroup.getContext()).
+				inflate(R.layout.item_branch, viewGroup, false);
+		return new UnitsVimport com.sicsr.programme.viewholder.UnitsViewHolder;
+iewHolder(itemView,mContext);
+	}
+
+}

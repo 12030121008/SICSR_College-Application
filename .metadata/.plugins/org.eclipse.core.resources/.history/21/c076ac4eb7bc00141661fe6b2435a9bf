@@ -1,0 +1,124 @@
+package com.sicsr.programme.dto;
+
+import java.util.Date;
+
+public class BranchesDto {
+
+
+	/*"nid": "33",
+    "bundle-label": "[ DevFX Main Server ] { DEDICATED } [ ADMIN ] {001}",
+    "status": "Active",
+    "bundle-type": "Dedicated Server",
+    "account-type": "Administrative",
+    "created": "1422504524",
+    "last-updated": "1422504961",
+    "description": "Adminustrative information regarding developfx.com / DevFX primary server"*/
+
+
+	private Integer id;
+	private String serverLabel;
+	private String status;
+	private String serverType;
+	private String accountType;
+	private Date created;
+	private Date modified;
+	private String description;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getServerLabel() {
+		return serverLabel;
+	}
+
+	public void setServerLabel(String serverLabel) {
+		this.serverLabel = serverLabel;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getServerType() {
+		return serverType;
+	}
+
+	public void setServerType(String serverType) {
+		this.serverType = serverType;
+	}
+
+	public String getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
+
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+
+	public Date getModified() {
+		return modified;
+	}
+
+	public void setModified(Date modified) {
+		this.modified = modified;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+	public enum Type {
+
+		Active("Active"),ADMINISTRATIVE("Administrative");
+
+		private String typeName;
+
+		private Type(String typeName) {
+			this.typeName = typeName;
+		}
+
+		public String getTypeName() {
+			return this.typeName;
+		}
+	}
+
+	public enum Parameter {
+
+		ID("nid"),ACCOUNT_LABEL("bundle-label"),STATUS("status"),
+		ACCOUNT_TYPE("account-type"),SERVER_TYPE("bundle-type"),
+		CREATED("created"),MODIFIED("last-updated"),DESCRIPTION("description");
+
+		private String parameterName;
+
+		private Parameter(String parameterName) {
+			this.parameterName = parameterName;
+		}
+
+		public String getParameterName() {
+			return this.parameterName;
+		}
+	}
+
+}

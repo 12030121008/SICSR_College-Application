@@ -1,0 +1,18 @@
+package com.sicsr.programme.dto;
+
+import java.util.Date;
+
+public class BranchesDto {
+
+	private Integer id;
+	private String name;
+	private Date created;
+	private Date modified;
+	private Integer id;
+
+
+
+
+
+
+}

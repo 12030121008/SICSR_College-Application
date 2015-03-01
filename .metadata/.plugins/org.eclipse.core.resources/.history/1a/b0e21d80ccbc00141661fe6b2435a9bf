@@ -1,0 +1,5 @@
+package com.sicsr.programme.entity;
+
+public class SemesterEntity {
+
+}

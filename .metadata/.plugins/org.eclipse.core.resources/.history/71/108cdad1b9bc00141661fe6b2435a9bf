@@ -1,0 +1,10 @@
+package com.sicsr.programme.database.dao;
+
+import com.sicsr.programme.database.DbOperations;
+import com.sicsr.programme.entity.BranchEntity;
+
+ 
+
+public class BranchDao extends BaseDao implements DbOperations<BranchEntity>{
+
+}

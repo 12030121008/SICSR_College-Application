@@ -1,0 +1,78 @@
+package com.sicsr.programme.fragment;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.sicsr.programme.R;
+import com.sicsr.programme.activity.BaseActivity;
+import com.sicsr.programme.adapter.BranchesAdapter;
+import com.sicsr.programme.database.DbOperationResponse;
+import com.sicsr.programme.database.dao.impl.BranchDaoImpl;
+import com.sicsr.programme.widget.EmptyRecyclerView;
+
+public class BranchesListFragment extends Fragment{
+
+	EmptyRecyclerView recyclerViewAccountsList;
+	BaseActivity mActivity;
+	BranchesAdapter branchesAdapter;
+	//private List<BrancheDto> branchesDto;
+
+	BranchDaoImpl branchDaoImpl;
+	private DbOperationResponse branchesResponse;
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		return inflater.inflate(R.layout.fragment_accountslist, container,false);
+	}
+
+
+	@Override
+	public void onViewCreated(View root, Bundle savedInstanceState) {
+		super.onViewCreated(root, savedInstanceState);
+		mActivity = (BaseActivity)getActivity();
+		//branchesDto = new ArrayList<BrancheDto>();
+		/*BrancheDto brancheDto = new BrancheDto();
+		brancheDto.setName("MBA_CA");
+		branchesDto.add(brancheDto);*/
+		if(savedInstanceState != null){
+			if(savedInstanceState.containsKey("id")){
+				Toast.makeText(mActivity, "id"+savedInstanceState.getInt("id"), Toast.LENGTH_SHORT).show();
+			}
+		}
+		recyclerViewAccountsList = (EmptyRecyclerView) root.findViewById(R.id.cardList);
+		recyclerViewAccountsList.setEmptyView(root.findViewById(R.id.progressBar1));
+		recyclerViewAccountsList.setHasFixedSize(true);
+		LinearLayoutManager llm = new LinearLayoutManager(mActivity);
+		llm.setOrientation(LinearLayoutManager.VERTICAL);
+		recyclerViewAccountsList.setLayoutManager(llm);
+		//mSwipeRefreshLayout = (SwipeRefreshLayout) root.findViewById(R.id.swipeRefreshLayoutAccountsList);
+		loadContent();
+
+	}
+
+
+	public void loadContent() {
+		branchDaoImpl = new BranchDaoImpl(mActivity);
+		branchesResponse = branchDaoImpl.findBranches();
+
+		if (branchesResponse.getFetchedData() != null && branchesResponse.getFetchedData().getCount() > 0) {
+			branchesAdapter = new BranchesAdapter(this,branchesResponse.getFetchedData());
+			recyclerViewAccountsList.setAdapter(branchesAdapter);
+		} else {
+			// Show from list or shoot error
+			if(!branchesResponse.getStatus()){
+				Toast.makeText(mActivity, branchesResponse.getErrorString(), Toast.LENGTH_SHORT).show();
+			}
+		}
+
+	}
+
+
+
+}

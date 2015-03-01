@@ -1,0 +1,21 @@
+package com.sicsr.programme.database.dao.impl;
+
+import com.sicsr.programme.activity.BaseActivity;
+import com.sicsr.programme.database.DbOperationResponse;
+import com.sicsr.programme.database.dao.UnitDao;
+import com.sicsr.programme.entity.SemesterEntity;
+
+public class UnitDaoImpl extends UnitDao {
+
+	public UnitDaoImpl(BaseActivity initActivity) {
+		super(initActivity);
+		// TODO Auto-generated constructor stub
+	}
+
+	 
+ 
+
+
+
+
+}

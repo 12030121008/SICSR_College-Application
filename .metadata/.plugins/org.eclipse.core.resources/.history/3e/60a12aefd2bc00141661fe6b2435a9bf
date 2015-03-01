@@ -1,0 +1,22 @@
+package com.sicsr.programme.database.dao.impl;
+
+import android.database.Cursor;
+
+import com.sicsr.programme.activity.BaseActivity;
+import com.sicsr.programme.database.DbOperationResponse;
+import com.sicsr.programme.database.dao.TopicDao;
+import com.sicsr.programme.database.dao.UnitDao;
+import com.sicsr.programme.entity.UnitEntity;
+
+public class TopicDaoImpl extends TopicDao {
+
+	public TopicDaoImpl(BaseActivity initActivity) {
+		super(initActivity);
+		// TODO Auto-generated constructor stub
+	}
+ 
+
+
+
+
+}

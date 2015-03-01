@@ -1,0 +1,48 @@
+package com.sicsr.programme.entity;
+
+import android.content.ContentValues;
+
+public class BranchEntity extends BaseEntity {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	public ContentValues getContentValues() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+	public enum Column {
+
+		NAME("name"), BRANCH_ID("id"),STATUS("status");
+
+		private String column;
+
+		private Column(String column) {
+			this.column = column;
+		}
+
+		public String getValue() {
+			return this.column;
+		}
+	}
+	
+	public enum Table {
+
+		BRANCHES("branches");
+
+		private String table;
+
+		private Table(String table) {
+			this.table = table;
+		}
+
+		public String getValue() {
+			return this.table;
+		}
+	}
+}

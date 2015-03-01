@@ -1,0 +1,451 @@
+package com.sicsr.programme.activity;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
+import android.content.res.Resources.NotFoundException;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.appcompat.R;
+import android.util.Base64;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.sicsr.programme.BaseFrameworkApplication;
+
+
+/**
+ * @author Faiyyaz Shaikh
+ *
+ */
+public abstract class BaseActivity extends ActionBarActivity{
+
+	protected final String TAG = this.getClass().getSimpleName();
+
+	private ProgressDialog mProgressDialog;
+	private Dialog mErrorDialog;
+	private Dialog mExitDialog;
+
+	private RESTResponder mRESTResponder;
+	private FragmentManager mFragmentManager;
+	private FragmentTransaction mFragmentTransaction;
+
+	private Boolean mExitDialogShowing = false;
+	private UserDto mLoggedInUser;
+	/*private DashboardClassDto mSelectedClass;*/
+
+	private boolean requiresLogin = true;
+	public static final String PREFERENCES = "BaseFrameworkPreferences";
+	SharedPreferences mSettings;
+	SharedPreferences.Editor mEditor;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setupRESTResponder();
+		mSettings = getSharedPreferences(PREFERENCES, MODE_PRIVATE);
+		performLoginCheck();
+	}
+
+	public void performLoginCheck() {
+
+		Utils.log(this, Utils.LOG_TYPE_DEBUG, TAG, "RequiresLogin? : " + String.valueOf(requiresLogin) + ", isUserLoggedIn()? : " + userIsLoggedIn());
+
+		if (requiresLogin && !userIsLoggedIn()) {
+			startActivity(new Intent(BaseActivity.this, LoginActivity.class));
+			BaseActivity.this.finish();
+		} else {
+			onLoginVerified();
+		}
+	}
+
+
+	public void setupRESTResponder() {
+		mFragmentManager = getSupportFragmentManager();
+		mFragmentTransaction = mFragmentManager.beginTransaction();
+
+		mRESTResponder = (RESTResponder) mFragmentManager.findFragmentByTag("RESTResponder");
+
+		if (mRESTResponder == null) {
+			mRESTResponder = new RESTResponder();
+
+			mFragmentTransaction.add(mRESTResponder, "RESTResponder");
+		}
+
+		mFragmentTransaction.commit();
+	}
+
+	public RESTResponder getRESTResponder() {
+		return mRESTResponder;
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (mExitDialogShowing) {
+			showExitDialog();
+		}
+	}
+
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putBoolean("mExitDialogShowing", mExitDialogShowing);
+	}
+
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		super.onRestoreInstanceState(savedInstanceState);
+		mExitDialogShowing = savedInstanceState.getBoolean("mExitDialogShowing");
+	}
+
+	@Override
+	public void onBackPressed() {
+		if (this instanceof HomeActivity) {
+			showExitDialog();
+		} else {
+			super.onBackPressed();
+		}
+	}
+
+
+	public void showExitDialog() {
+		mExitDialog = new Dialog(this, R.style.error_dialog_theme);
+		mExitDialog.setContentView(R.layout.view_custom_dialog);
+
+		Button dialogYesButton = (Button) mExitDialog.findViewById(R.id.btnYes);
+
+		dialogYesButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				mExitDialogShowing = false;
+				mExitDialog.dismiss();
+				BaseActivity.super.onBackPressed();
+
+			}
+		});
+
+		Button dialogNoButton = (Button) mExitDialog.findViewById(R.id.btnNo);
+
+		dialogNoButton.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				mExitDialogShowing = false;
+				mExitDialog.dismiss();
+			}
+		});
+
+		mExitDialog.show();
+		mExitDialogShowing = true; 
+
+	}
+
+	@Override
+	protected void onDestroy() {
+
+		if (mProgressDialog != null) {
+			mProgressDialog.dismiss();
+		}
+
+		if (mExitDialog != null) {
+			mExitDialog.dismiss();
+		}
+
+		super.onDestroy();
+	}
+
+	public boolean userIsLoggedIn() {
+		return !mSettings.getString("user", "").equals("");
+	}
+
+	public void loginUser(UserDto userDto) {
+		savePreference("user", userDto);
+		mLoggedInUser = userDto;
+	}
+
+
+
+	public void savePreference(String key, Object value) {
+		mEditor = mSettings.edit();
+
+		String savedValue = null;
+
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		ObjectOutput out = null;
+
+		try {
+			out = new ObjectOutputStream(bos);
+			out.writeObject(value);
+
+			savedValue = Base64.encodeToString(bos.toByteArray(), Base64.DEFAULT);
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				out.close();
+				bos.close();
+			} catch (Exception ex) {
+			}
+		}
+
+		if (savedValue != null) {
+			mEditor.putString(key, savedValue);
+			mEditor.commit();
+		}
+	}
+
+	public void removePreference(String key) {
+		mEditor = mSettings.edit();
+		mEditor.remove(key);
+		mEditor.commit();
+	}
+
+	public void removeRegisterComplete() {
+		removePreference("registerComplete");
+	}
+
+	public BaseFrameworkApplication getBaseFrameworkApplication() {
+		return (BaseFrameworkApplication) getApplication();
+	}
+
+	public void lockOrientation() {
+		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		} else {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+		}
+	}
+
+	public void releaseOrientation() {
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+	}
+
+
+	public UserDto getLoggedInUser() {
+
+		if (mLoggedInUser == null) {
+
+			String userDataString = mSettings.getString("user", "");
+
+			if (userDataString != null && !userDataString.equals("")) {
+				byte[] userData = Base64.decode(userDataString, Base64.DEFAULT);
+
+				ByteArrayInputStream bis = new ByteArrayInputStream(userData);
+				ObjectInput in = null;
+
+				try {
+					in = new ObjectInputStream(bis);
+					mLoggedInUser = (UserDto) in.readObject();
+
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				} finally {
+					try {
+						bis.close();
+						in.close();
+					} catch (Exception ex) {
+					}
+				}
+			}
+		}
+
+		return mLoggedInUser;
+	}
+
+	/*
+	 * The database should be opened upon first app launch. In the unlikely case
+	 * that it is not or the database does not exist anymore (user cleared data)
+	 * we need to open it.
+	 */
+	public void initializeDb() {
+		BaseFrameworkApplication baseframeworkApplication = getBaseFrameworkApplication();
+
+		if (baseframeworkApplication.getDbAdapter() == null) {
+			baseframeworkApplication.initDb();
+		}
+	}
+
+	public void logoutUser() {
+		removePreference("user");
+		removePreference("loginSyncStatus");
+		removePreference("selectedPosition");
+		removePreference("registerComplete");
+		//removePreference(Eula.PREFERENCE_EULA_ACCEPTED);
+		mLoggedInUser = null;
+	}
+
+
+	public interface ErrorDialogListener {
+		public void onOk();
+	}
+
+	public void showErrorDialog(String errorMessage) {
+
+		if (mProgressDialog != null) {
+			mProgressDialog.dismiss();
+		}
+
+		mErrorDialog = new Dialog(this, R.style.error_dialog_theme);
+		mErrorDialog.setContentView(R.layout.view_custom_dialog);
+
+		TextView txtError = (TextView) mErrorDialog.findViewById(R.id.dialogTitle);
+		txtError.setText(errorMessage);
+
+		Button dialogOkButton = (Button) mErrorDialog.findViewById(R.id.btnYes);
+		((View) mErrorDialog.findViewById(R.id.negativeButtonLL)).setVisibility(View.GONE);
+
+		dialogOkButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mErrorDialog.dismiss();
+			}
+		});
+
+		mErrorDialog.show();
+	}
+
+
+	public void showErrorDialog(String errorMessage, final ErrorDialogListener errorDialogListener) {
+
+		if (mProgressDialog != null) {
+			mProgressDialog.dismiss();
+		}
+
+		mErrorDialog = new Dialog(this, R.style.error_dialog_theme);
+		mErrorDialog.setContentView(R.layout.view_custom_dialog);
+
+		TextView txtError = (TextView) mErrorDialog.findViewById(R.id.dialogTitle);
+		txtError.setText(errorMessage);
+
+		Button dialogOkButton = (Button) mErrorDialog.findViewById(R.id.btnYes);
+		((View) mErrorDialog.findViewById(R.id.negativeButtonLL)).setVisibility(View.GONE);
+		dialogOkButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				errorDialogListener.onOk();
+				mErrorDialog.dismiss();
+			}
+		});
+
+		mErrorDialog.show();
+	}
+
+	public void showProgressDialog(String message) {
+		dismissProgressDialog();
+		mProgressDialog = ProgressDialog.show(BaseActivity.this, "", message);
+	}
+
+	public void updateProgressDialog(String message) {
+		if (mProgressDialog != null) {
+			mProgressDialog.setMessage(message);
+		}
+	}
+
+	public void dismissProgressDialog() {
+		if (mProgressDialog != null) {
+			mProgressDialog.dismiss();
+		}
+
+		mProgressDialog = null;
+	}
+
+	public boolean isRequiresLogin() {
+		return requiresLogin;
+	}
+
+	public void setRequiresLogin(boolean requiresLogin) {
+		this.requiresLogin = requiresLogin;
+	}
+
+	public abstract void setupUi();
+	public abstract void loadContent();
+	public abstract void onLoginVerified();
+	public abstract void onRESTResultReceived(int resultCode, String resultData, int apiCallIdentifier);
+
+
+	public boolean isApiAvailable() {
+		// TODO: Check with client if he wants to use app only when wifi is connected.  
+
+		boolean connected = false;
+		ConnectivityManager connManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+		NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+
+		//if (mWifi.isConnected()) {
+		URL url;
+		try {
+			url = new URL(getResources().getString(R.string.api_url));
+			HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+			urlc.setConnectTimeout(1000 * 5);
+			urlc.connect();
+			// if (urlc.getResponseCode() == 200) {
+			connected = true; 
+			// }
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (NotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		//}
+		return connected;
+	}
+
+	public interface ApiListener {
+		public void onApiCheckFinished(boolean available);
+	}
+
+	public class CheckApiAsync extends AsyncTask<Void, Void, Boolean> {
+
+		private final ApiListener apiListener;
+
+		public CheckApiAsync(ApiListener apiListener) {
+			this.apiListener = apiListener;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			showProgressDialog("Checking API Availability...");
+			super.onPreExecute();
+		}
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			return isApiAvailable();
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			dismissProgressDialog();
+			this.apiListener.onApiCheckFinished(result);
+			super.onPostExecute(result);
+		}
+	}
+
+}

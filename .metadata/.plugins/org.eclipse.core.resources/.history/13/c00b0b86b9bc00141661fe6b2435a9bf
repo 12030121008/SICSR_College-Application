@@ -1,0 +1,7 @@
+package com.sicsr.programme.database.dao;
+
+import biz.cytrus.lightbulb.database.DbOperations;
+
+public class BranchDao extends BaseDao implements DbOperations{
+
+}

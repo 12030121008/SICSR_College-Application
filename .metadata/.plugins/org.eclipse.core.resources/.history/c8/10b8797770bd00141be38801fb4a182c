@@ -1,0 +1,111 @@
+package com.sicsr.programme.database.dao.impl;
+
+import android.database.Cursor;
+
+import com.sicsr.programme.activity.BaseActivity;
+import com.sicsr.programme.database.DbOperationResponse;
+import com.sicsr.programme.database.dao.TopicDao;
+import com.sicsr.programme.entity.BaseEntity;
+import com.sicsr.programme.entity.TopicEntity;
+
+public class TopicDaoImpl extends TopicDao {
+
+	public TopicDaoImpl(BaseActivity initActivity) {
+		super(initActivity);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public DbOperationResponse add(TopicEntity entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DbOperationResponse remove(Long entityId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DbOperationResponse update(Long entityId, TopicEntity updatedEntity) {
+		DbOperationResponse dbResponse = new DbOperationResponse();
+
+		try {
+			Integer rowsAffected = getDbAdapter().getDatabase().update(
+					TopicEntity.Table.TOPICS.getValue(),
+					updatedEntity.getContentValues(),
+					BaseEntity.Column.ID + " = " + entityId, null);
+			dbResponse.setRowsAffected(rowsAffected);
+
+			if (dbResponse.getRowsAffected() > 0) {
+				dbResponse.getMessages().add(
+						"User TOPICS item successfully updated!");
+				dbResponse.setStatus(true);
+			} else {
+				dbResponse.getErrors().add("User note content item not found!");
+				dbResponse.setStatus(false);
+			}
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			dbResponse.setStatus(false);
+			dbResponse.getErrors().add(ex.getMessage());
+		}
+
+		return dbResponse;
+	}
+
+	@Override
+	public DbOperationResponse exists(Long entityId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DbOperationResponse findMaxId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DbOperationResponse findById(Long entityId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DbOperationResponse findTopics(int unitId) {
+		DbOperationResponse dbResponse = new DbOperationResponse();
+
+		try {
+
+			StringBuilder sqlBuilder = new StringBuilder();
+
+			sqlBuilder.append("SELECT * ");
+			sqlBuilder.append("FROM " + TopicEntity.Table.TOPICS.getValue() + " ");
+			sqlBuilder.append(" WHERE unitid = " +unitId );
+
+			Cursor cursor = getDbAdapter().getDatabase().rawQuery(sqlBuilder.toString(), null);
+
+			dbResponse.setFetchedData(cursor);
+
+			if (dbResponse.getFetchedData() != null && dbResponse.getFetchedData().getCount() > 0) {
+				dbResponse.getMessages().add("Topics retrieved");
+				dbResponse.setStatus(true);
+			} else {
+				dbResponse.getErrors().add("No Topic items found in the database");
+				dbResponse.setStatus(false);
+			}
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return dbResponse;
+	}
+
+
+
+
+
+}

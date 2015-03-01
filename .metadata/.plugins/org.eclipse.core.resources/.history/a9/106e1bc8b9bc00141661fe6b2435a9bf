@@ -1,0 +1,8 @@
+package com.sicsr.programme.entity;
+
+import android.content.ContentValues;
+
+public class BranchEntity extends BaseEntity {
+
+	 
+}

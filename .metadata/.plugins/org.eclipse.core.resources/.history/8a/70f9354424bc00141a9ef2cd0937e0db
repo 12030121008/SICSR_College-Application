@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:freecharge="http://schemas.android.com/apk/res/com.freecharge.android"
+    android:id="@+id/base_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <RelativeLayout
+        android:id="@+id/item_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="56.0dip" >
+
+        <ImageView
+            android:id="@+id/nav_icon"
+            android:layout_width="20.0dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15.0dip"
+            android:layout_marginRight="10.0dip"
+            android:paddingBottom="10.0dip"
+            android:paddingTop="10.0dip"
+            android:src="@drawable/ic_launcher" />
+
+        <com.devfx.controlpanel.widget.DevFxTextView
+            android:id="@+id/nav_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="5.0dip"
+            android:layout_toRightOf="@+id/nav_icon"
+            android:gravity="center_vertical"
+            android:paddingBottom="10.0dip"
+            android:paddingRight="20.0dip"
+            android:paddingTop="10.0dip"
+            android:textColor="@color/fs_nav_gray"
+            android:textSize="@dimen/text_small" />
+
+        <com.devfx.controlpanel.widget.DevFxTextView
+            android:id="@+id/nav_extra_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10.0dip"
+            android:layout_toLeftOf="@+id/nav_slide"
+            android:gravity="center_vertical"
+            android:text="@string/blank"
+            android:textColor="@color/fs_nav_gray"
+            android:textSize="@dimen/text_xsmall"
+            android:visibility="gone" />
+
+        <ProgressBar
+            android:id="@+id/extras_progress_circular"
+            style="?android:attr/progressBarStyleSmallTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10.0dip"
+            android:layout_toLeftOf="@+id/nav_slide"
+            android:max="10000"
+            android:visibility="gone" />
+
+        <View
+            android:id="@+id/nav_slide"
+            android:layout_width="3.0dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@color/fs_button_dark_red"
+            android:visibility="gone" />
+
+        <ProgressBar
+            android:id="@+id/progress_circular"
+            style="?android:attr/progressBarStyleSmallTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10.0dip"
+            android:max="10000"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+</RelativeLayout>

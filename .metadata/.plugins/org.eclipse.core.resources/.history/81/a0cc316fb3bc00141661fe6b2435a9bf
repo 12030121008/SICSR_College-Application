@@ -1,0 +1,86 @@
+package com.sicsr.programme.database;
+
+import java.io.IOException;
+
+import android.content.Context;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+
+/**
+ * @author Faiyyaz Shaikh
+ *
+ */
+public class DbAdapter {
+
+	private Context context;
+	private DbHelper dbHelper;
+	private SQLiteDatabase database;
+
+	public DbAdapter(Context context) {
+		this.context = context;
+	}
+
+	public DbAdapter open() {
+		this.dbHelper = new DbHelper(context);
+		//this.database = dbHelper.getReadableDatabase();
+		/*AssetDatabaseOpenHelper assetDatabaseOpenHelper = new AssetDatabaseOpenHelper(getContext());
+		assetDatabaseOpenHelper.openDatabase();*/
+		//this.database = dbHelper.getWritableDatabase();
+		
+		/* * this.database = dbHelper.getWritableDatabase();
+		this.dbHelper.initialise();*/
+		/* try {
+
+			this.dbHelper.createDataBase();
+
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+			throw new Error("Unable to create database");
+
+		}
+
+		try {
+
+			this.dbHelper.openDataBase();
+
+		}catch(SQLException sqle){
+			sqle.printStackTrace();
+			throw sqle;
+
+		}
+		*/
+
+		return this;
+	}
+
+	public void close() {
+		if (this.dbHelper != null) {
+			this.dbHelper.close();
+			this.database.close();
+		}
+	}
+
+	public Context getContext() {
+		return context;
+	}
+
+	public void setContext(Context context) {
+		this.context = context;
+	}
+
+	public DbHelper getDbHelper() {
+		return dbHelper;
+	}
+
+	public void setDbHelper(DbHelper dbHelper) {
+		this.dbHelper = dbHelper;
+	}
+
+	public SQLiteDatabase getDatabase() {
+		return database;
+	}
+
+	public void setDatabase(SQLiteDatabase database) {
+		this.database = database;
+	}
+}

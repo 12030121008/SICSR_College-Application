@@ -1,0 +1,5 @@
+package com.sicsr.programme.dto;
+
+public class SemesterDto {
+
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ZigZagSplitView">
+        <attr name="fill_color" format="color" />
+        <attr name="pin_start_height" format="float" />
+        <attr name="pin_height" format="dimension" />
+        <attr name="pin_width" format="dimension" />
+        <attr name="inverse" format="boolean" />
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,12 @@
+<resources>
+
+    <string name="app_name">SICSR</string>
+    <string name="close">Close</string>
+    <string name="open">Open</string>
+    <string name="programmes">Programmes Offered</string>
+    <string name="semesters">Semesters</string>
+    <string name="subjects">Subjects</string>
+    <string name="topics">Topics</string>
+    <string name="units">Units</string>
+
+</resources>

@@ -1,0 +1,101 @@
+1424780318073	Delete elements
+1424780406650	Rename package 'com.devfx.controlpanel.database'
+1424780446538	Rename package 'com.devfx.controlpanel.entity'
+1424781536555	Rename package 'com.devfx.controlpanel.fragment'
+1424781673068	Rename package 'com.devfx.controlpanel.dto'
+1424781678642	Delete element
+1424781946802	Delete elements
+1424781951597	Delete elements
+1424782076242	Rename package 'com.devfx.controlpanel.adapter'
+1424782163169	Rename package 'com.devfx.controlpanel.viewholder'
+1424782438950	Delete element
+1424837797178	Rename package 'com.devfx.controlpanel.recyclerview'
+1424839305983	Rename resource 'Syllabus.sqlite'
+1424840123183	Rename resource 'sicsr.sqlite'
+1424845433206	Rename type 'AccountsListFragment'
+1424845443923	Rename field 'accountsListFragment'
+1424845517300	Rename type 'CustomerAccountAdapter'
+1424845531075	Rename field 'customerAccountAdapter'
+1424845553957	Rename type 'CustomerAccountDto'
+1424845561674	Rename field 'customerAccounts'
+1424845584541	Rename field 'customerAccountDtos'
+1424845602962	Rename type 'CustomerAccountViewHolder'
+1424846027021	Rename field 'item_account_summary'
+1424846168487	Rename type 'BranchesDto'
+1424850167503	Rename local variable 'v'
+1424854649328	Rename type 'BrancheDto'
+1424854717057	Rename type 'Semester'
+1424854782348	Copy compilation unit
+1424854811756	Rename field 'branch_outer'
+1424854832049	Copy compilation unit
+1424854890162	Copy compilation unit
+1424854967338	Rename enum constant 'BRANCHES'
+1424855330968	Copy compilation unit
+1424855369353	Rename field 'fragment_accountslist'
+1424855415783	Rename field 'branchDaoImpl'
+1424855457718	Rename field 'branchesResponse'
+1424855485627	Copy compilation unit
+1424855503915	Rename field 'branchesDtos'
+1424855522505	Rename local variable 'customerAccountDtos'
+1424855551974	Rename field 'semesterDto'
+1424855568341	Rename local variable 'branchDto'
+1424855712208	Rename field 'branchesAdapter'
+1424856046088	Copy compilation unit
+1424856069995	Copy compilation unit
+1424856101837	Copy compilation unit
+1424856114713	Rename field 'branch_summary'
+1424856118446	Rename field 'wrappewr'
+1424856149895	Copy compilation unit
+1424856211591	Copy compilation unit
+1424856281834	Rename enum constant 'BRANCHES'
+1424856357735	Copy compilation unit
+1424856395577	Rename field 'semesterDtos'
+1424856423972	Rename local variable 'semesterDto'
+1424856450841	Copy compilation unit
+1424856475167	Rename field 'semesterAdapter'
+1424856546864	Rename field 'semesterDaoImpl'
+1424856560246	Rename field 'semesterDbResponse'
+1424856592435	Rename field 'recyclerViewAccountsList'
+1424856603969	Rename field 'recyclerViewAccountsList'
+1424856615794	Rename field 'recyclerViewAccountsList'
+1424856663299	Rename type 'SementerViewHolder'
+1424856789426	Copy compilation unit
+1424856823806	Copy compilation unit
+1424856863718	Copy compilation unit
+1424856889834	Copy compilation unit
+1424856933425	Copy compilation unit
+1424857002536	Copy compilation unit
+1424857095894	Rename field 'subjectDtos'
+1424857134819	Copy compilation unit
+1424857166595	Rename field 'subjectDaoImpl'
+1424857176503	Rename field 'subjectDbResponse'
+1424857325541	Copy compilation unit
+1424857346143	Copy compilation unit
+1424857372247	Copy compilation unit
+1424857390714	Copy compilation unit
+1424857449032	Copy compilation unit
+1424857455044	Rename type 'TopicImpl'
+1424857530896	Copy compilation unit
+1424857570906	Rename field 'unitDtos'
+1424857612833	Copy compilation unit
+1424857670436	Rename field 'unitDaoImpl'
+1424857678190	Rename field 'unitDbResponse'
+1424857733226	Rename field 'subjectAdapter'
+1424857765091	Rename local variable 'semesterDto'
+1424862298442	Copy file
+1424862513870	Rename field 'item_branch'
+1424863779824	Rename resource 'btn_green_selector.xml'
+1424924824196	Rename local variable 'subjectDto'
+1424924828859	Rename local variable 'TopicDto'
+1424926295264	Rename local variable 'subjectDto'
+1424942339013	Rename field 'progressBar1'
+1424942865853	Delete element
+1424943574925	Copy file
+1424946256209	Delete element
+1424946260232	Delete element
+1424946337829	Delete elements
+1424949067558	Delete element
+1424949077931	Delete element
+1424949083639	Delete element
+1424949086681	Delete element
+1424949090179	Delete element

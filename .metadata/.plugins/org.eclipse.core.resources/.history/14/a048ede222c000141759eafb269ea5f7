@@ -1,0 +1,13 @@
+package com.sicsr.programme.dto;
+
+/**
+ * @author Faiyyaz Shaikh
+ *
+ */
+public class BaseDto {
+
+	
+	public BaseDto(){
+		
+	}
+}

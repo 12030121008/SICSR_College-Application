@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="margin">10.0dip</dimen>
+    <dimen name="margin_large">15.0dip</dimen>
+    <dimen name="margin_small">5.0dip</dimen>
+    <dimen name="margin_xlarge">20.0dip</dimen>
+    <dimen name="padding">10.0dip</dimen>
+    <dimen name="padding_large">15.0dip</dimen>
+    <dimen name="padding_small">5.0dip</dimen>
+    <dimen name="padding_xlarge">22.0dip</dimen>
+    
+    <dimen name="text_default">18.0dip</dimen>
+    <dimen name="text_xxlarge">26.0dip</dimen>
+    <dimen name="text_xlarge">22.0dip</dimen>
+    <dimen name="text_large">18.0dip</dimen>
+    <dimen name="text_medium">16.0dip</dimen>
+    <dimen name="text_small">14.0dip</dimen>
+    <dimen name="text_xsmall">12.0dip</dimen>
+    <dimen name="text_xxsmall">10.0dip</dimen>
+    <dimen name="fragment_margin">@dimen/margin_small</dimen>
+    <dimen name="navigationslider_width">330dp</dimen>
+    
+
+</resources>

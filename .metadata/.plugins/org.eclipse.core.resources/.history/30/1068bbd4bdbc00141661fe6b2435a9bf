@@ -1,0 +1,59 @@
+package com.sicsr.programme.adapter;
+
+import java.util.List;
+
+import android.database.Cursor;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.sicsr.programme.R;
+import com.sicsr.programme.dto.BrancheDto;
+import com.sicsr.programme.fragment.BranchesListFragment;
+import com.sicsr.programme.viewholder.BranchesViewHolder;
+
+public class BranchesAdapter extends RecyclerView.Adapter<BranchesViewHolder> {
+
+	private BranchesListFragment mContext;
+	private List<BrancheDto> branchesDtos;
+	private Cursor branchCursor;
+	
+	
+	public BranchesAdapter(BranchesListFragment mContext, List<BrancheDto> customerAccountDtos) {
+		this.mContext = mContext;
+		this.branchesDtos = customerAccountDtos;
+	}
+
+	@Override
+	public int getItemCount() {
+		return branchesDtos.size();
+	}
+
+	@Override
+	public void onBindViewHolder(BranchesViewHolder holder, int position) {
+
+		BrancheDto  branchesDto = branchesDtos.get(position);
+		holder.branch_name.setText(branchesDto.getName());
+		/*holder.account_id.setText(String.valueOf(customerAccountDto.getId()));
+		holder.account_label.setText(String.valueOf(customerAccountDto.getServerLabel()));
+		holder.account_server_info.setText(customerAccountDto.getServerType());
+		holder.account_type_info.setText(customerAccountDto.getAccountType());
+		if(customerAccountDto.getStatus().equalsIgnoreCase(CustomerAccountDto.Type.Active.getTypeName())){
+			holder.account_status.setImageDrawable(mContext.getResources().getDrawable(R.drawable.active));
+		}else{
+			holder.account_status.setImageDrawable(mContext.getResources().getDrawable(R.drawable.inactive));
+		}*/
+
+
+	}
+
+	@Override
+	public BranchesViewHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
+		View itemView = LayoutInflater.
+				from(viewGroup.getContext()).
+				inflate(R.layout.item_branch, viewGroup, false);
+		return new BranchesViewHolder(itemView);
+	}
+
+}

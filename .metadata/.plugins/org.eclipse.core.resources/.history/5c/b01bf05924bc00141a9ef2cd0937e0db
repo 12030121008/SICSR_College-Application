@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="fs_background_light_green">#ff65c6bb</color>
+    <color name="fs_background_green">#ff4d9891</color>
+    <color name="fs_background_dark_green">#ff43847e</color>
+    <color name="fs_background_login_green">#ff61c4bb</color>
+    <color name="fs_white">#ffffffff</color>
+
+</resources>

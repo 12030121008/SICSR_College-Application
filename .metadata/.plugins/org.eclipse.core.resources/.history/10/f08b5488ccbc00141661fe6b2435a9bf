@@ -1,0 +1,13 @@
+package com.sicsr.programme.entity;
+
+import android.content.ContentValues;
+
+public class SemesterEntity extends BaseEntity {
+
+	@Override
+	public ContentValues getContentValues() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

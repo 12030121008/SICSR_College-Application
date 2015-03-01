@@ -1,0 +1,36 @@
+package com.sicsr.programme.viewholder;
+
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class CustomerAccountViewHolder extends RecyclerView.ViewHolder {
+
+	public TextView date_day_of_month;
+	public TextView date_month;
+	public TextView account_label;
+	public TextView account_server_info;
+	public TextView account_type_info;
+	public TextView account_id;
+	public ImageView account_status;
+	// description
+
+
+
+
+	public CustomerAccountViewHolder(View root) {
+		super(root);
+	/*	date_day_of_month = (TextView) root.findViewById(R.id.date_day_of_month);
+		date_month = (TextView) root.findViewById(R.id.date_month);
+		account_label = (TextView) root.findViewById(R.id.account_label);
+		account_server_info = (TextView) root.findViewById(R.id.account_server_info);
+		account_type_info = (TextView) root.findViewById(R.id.account_type_info);
+		account_id = (TextView) root.findViewById(R.id.account_id);
+		account_status =(ImageView) root.findViewById(R.id.account_status);*/
+	}
+
+
+
+
+}

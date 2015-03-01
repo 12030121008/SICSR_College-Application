@@ -1,0 +1,190 @@
+package com.sicsr.programme.activity;
+
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Base64;
+
+import com.sicsr.programme.BaseFrameworkApplication;
+
+
+/**
+ * @author Faiyyaz Shaikh
+ *
+ */
+public abstract class BaseActivity extends ActionBarActivity{
+
+	protected final String TAG = this.getClass().getSimpleName();
+
+	private ProgressDialog mProgressDialog;
+	private Dialog mErrorDialog;
+	private Dialog mExitDialog;
+
+
+	private FragmentManager mFragmentManager;
+	private FragmentTransaction mFragmentTransaction;
+
+	private Boolean mExitDialogShowing = false;
+
+	private boolean requiresLogin = true;
+	public static final String PREFERENCES = "BaseFrameworkPreferences";
+	SharedPreferences mSettings;
+	SharedPreferences.Editor mEditor;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		mSettings = getSharedPreferences(PREFERENCES, MODE_PRIVATE);
+		setupUi(savedInstanceState);
+	}
+
+
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (mExitDialogShowing) {
+			//showExitDialog();
+		}
+	}
+
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putBoolean("mExitDialogShowing", mExitDialogShowing);
+	}
+
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		super.onRestoreInstanceState(savedInstanceState);
+		mExitDialogShowing = savedInstanceState.getBoolean("mExitDialogShowing");
+	}
+
+	@Override
+	public void onBackPressed() {
+		if (this instanceof HomeActivity) {
+			//showExitDialog();
+			super.onBackPressed();
+		} else {
+			super.onBackPressed();
+		}
+	}
+
+
+	@Override
+	protected void onDestroy() {
+
+		if (mProgressDialog != null) {
+			mProgressDialog.dismiss();
+		}
+
+		if (mExitDialog != null) {
+			mExitDialog.dismiss();
+		}
+
+		super.onDestroy();
+	}
+
+
+	public void savePreference(String key, Object value) {
+		mEditor = mSettings.edit();
+
+		String savedValue = null;
+
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		ObjectOutput out = null;
+
+		try {
+			out = new ObjectOutputStream(bos);
+			out.writeObject(value);
+
+			savedValue = Base64.encodeToString(bos.toByteArray(), Base64.DEFAULT);
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				out.close();
+				bos.close();
+			} catch (Exception ex) {
+			}
+		}
+
+		if (savedValue != null) {
+			mEditor.putString(key, savedValue);
+			mEditor.commit();
+		}
+	}
+
+	public void removePreference(String key) {
+		mEditor = mSettings.edit();
+		mEditor.remove(key);
+		mEditor.commit();
+	}
+
+	public BaseFrameworkApplication getBaseFrameworkApplication() {
+		return (BaseFrameworkApplication) getApplication();
+	}
+
+	public void lockOrientation() {
+		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		} else {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+		}
+	}
+
+	public void releaseOrientation() {
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+	}
+
+
+	/*
+	 * The database should be opened upon first app launch. In the unlikely case
+	 * that it is not or the database does not exist anymore (user cleared data)
+	 * we need to open it.
+	 */
+	public void initializeDb() {
+		BaseFrameworkApplication baseframeworkApplication = getBaseFrameworkApplication();
+
+		if (baseframeworkApplication.getDbAdapter() == null) {
+			baseframeworkApplication.initDb();
+		}
+	}
+
+
+	public void showProgressDialog(String message) {
+		dismissProgressDialog();
+		mProgressDialog = ProgressDialog.show(BaseActivity.this, "", message);
+	}
+
+	public void updateProgressDialog(String message) {
+		if (mProgressDialog != null) {
+			mProgressDialog.setMessage(message);
+		}
+	}
+
+	public void dismissProgressDialog() {
+		if (mProgressDialog != null) {
+			mProgressDialog.dismiss();
+		}
+
+		mProgressDialog = null;
+	}
+
+	public abstract void setupUi(Bundle savedInstanceState);
+	public abstract void loadContent();
+
+
+}

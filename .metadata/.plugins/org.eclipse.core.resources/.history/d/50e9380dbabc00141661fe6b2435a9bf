@@ -1,0 +1,13 @@
+package com.sicsr.programme.database.dao.impl;
+
+import com.sicsr.programme.activity.BaseActivity;
+import com.sicsr.programme.database.dao.BranchDao;
+
+public class BranchDaoImpl extends BranchDao {
+
+	public BranchDaoImpl(BaseActivity initActivity) {
+		super(initActivity);
+		// TODO Auto-generated constructor stub
+	}
+
+}

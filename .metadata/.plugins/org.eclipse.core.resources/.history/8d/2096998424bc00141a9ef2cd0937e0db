@@ -1,0 +1,71 @@
+package com.sicsr.programme.fragment;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
+
+import com.sicsr.programme.R;
+import com.sicsr.programme.activity.HomeActivity;
+import com.sicsr.programme.dto.NavigationItemDto;
+
+public class LeftNavigationDrawer extends Fragment {
+
+	ListView navigationListview;
+	NavigationAdapter navigationAdapter;
+	View headerView;
+	List<NavigationItemDto> navigationList;
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		headerView = inflater.inflate(R.layout.navigation_drawer_header, null);
+		return inflater.inflate(R.layout.fragment_navigationdrawer, null);
+	}
+
+	@Override
+	public void onViewCreated(View root, Bundle savedInstanceState) {
+		super.onViewCreated(root, savedInstanceState);
+		navigationListview = (ListView) root.findViewById(R.id.list_view);
+		loadContent();
+	}
+
+	private void loadContent(){
+		navigationList = new ArrayList<NavigationItemDto>();
+		
+		NavigationItemDto navigationItemProfile = new NavigationItemDto();
+		navigationItemProfile.setTitle("Profile");
+		navigationItemProfile.setDrawableId(R.drawable.recharges);
+		navigationList.add(navigationItemProfile);
+		
+		NavigationItemDto navigationItemFeedback = new NavigationItemDto();
+		navigationItemFeedback.setTitle("Feedback");
+		navigationItemFeedback.setDrawableId(R.drawable.feedback);
+		navigationList.add(navigationItemFeedback);
+		
+		NavigationItemDto navigationItemAboutUs = new NavigationItemDto();
+		navigationItemAboutUs.setTitle("About us");
+		navigationItemAboutUs.setDrawableId(R.drawable.about);
+		navigationList.add(navigationItemAboutUs);
+		
+		
+		NavigationItemDto navigationItemSignOut = new NavigationItemDto();
+		navigationItemSignOut.setTitle("Sign out");
+		navigationItemSignOut.setDrawableId(R.drawable.logout);
+		navigationList.add(navigationItemSignOut);
+
+		navigationAdapter = new NavigationAdapter(((HomeActivity)getActivity()), R.layout.navigation_drawer_list_item,navigationList);
+		navigationListview.addHeaderView(headerView);
+		navigationListview.setAdapter(navigationAdapter);
+	}
+	
+	public void signOutRequest(){
+		((HomeActivity)getActivity()).signOutRequest();
+	}
+
+}

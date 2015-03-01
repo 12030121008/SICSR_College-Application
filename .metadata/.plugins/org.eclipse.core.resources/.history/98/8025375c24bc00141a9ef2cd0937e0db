@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="fs_background_light_green">#ff65c6bb</color>
+    <color name="fs_background_green">#ff4d9891</color>
+    <color name="fs_background_dark_green">#ff43847e</color>
+    <color name="fs_background_login_green">#ff61c4bb</color>
+    <color name="fs_white">#ffffffff</color>
+    
+    
+       <color name="btn_focused">#ff0099cc</color>
+    <color name="btn_normal">#00000000</color>
+    <color name="btn_orange_red">#ffe95941</color>
+    <color name="btn_orange_red_disabled">#fff0ae94</color>
+    <color name="btn_orange_red_focused">#fff09c7f</color>
+    <color name="btn_orange_red_pressed">#fffe9a6c</color>
+    <color name="btn_orange_red_selected">#fff09c7f</color>
+    <color name="btn_pressed">#ff33b5e5</color>
+    <color name="btn_text_color">#ffffffff</color>
+    <color name="btn_text_color_disabled">#ffe2e2e2</color>
+    <color name="btn_text_color_pressed">#fff6f6f6</color>
+    <color name="gray">#ff999999</color>
+    <color name="dark_gray">#ff666666</color>
+    <color name="light_gray">#ffbbbbbb</color>
+    <color name="light_semitrans_gray">#77777777</color>
+    <color name="fs_background_white">#fff9f9f9</color>
+    <color name="fs_background_asphalt">#ff34495e</color>
+    <color name="fs_background_red">#ffdd4d3b</color>
+    <color name="fs_background_light_gray">#fff1f1f1</color>
+    <color name="fs_background_light_gray_transparent">#ccf1f1f1</color>
+    <color name="fs_background_gray">#ffe9ecee</color>
+    <color name="fs_background_dark_gray">#ffb0b7c3</color>
+    <color name="fs_background_xdark_gray">#ff919bac</color>
+    <color name="fs_background_light_green">#ff65c6bb</color>
+    <color name="fs_background_green">#ff4d9891</color>
+    <color name="fs_background_dark_green">#ff43847e</color>
+    <color name="fs_background_login_green">#ff61c4bb</color>
+    <color name="fs_text_light_green">#ff61c4bb</color>
+    <color name="fs_text_transparent_white">#99ffffff</color>
+    <color name="fs_text_hint_light_gray">#ffeeeeee</color>
+    <color name="fs_text_hint_gray">#ff999999</color>
+    <color name="fs_button_border_gray">#ff888888</color>
+    <color name="fs_background_light">#ffeeeeee</color>
+    <color name="fs_card_border_gray">#ffbbbbbb</color>
+    <color name="fs_gplus_selected_red">#ffe78276</color>
+    <color name="fs_gplus_red">#ffee5d4c</color>
+    <color name="fs_gplus_icon_red">#ffdd4b39</color>
+    <color name="fs_white">#ffffffff</color>
+    <color name="fs_text_white">#ffffffff</color>
+    <color name="fs_dull_white">#ffaccbc9</color>
+    <color name="fs_button_dark_red">#ffe76f62</color>
+    <color name="fs_button_red">#ffe76f62</color>
+    <color name="fs_nav_gray">#ff919bac</color>
+    <color name="fs_summary_operator_color">#ff919bac</color>
+    <color name="fs_summary_divider">#fff3f3f3</color>
+    <color name="fs_summary_number_color">#ff34495e</color>
+
+</resources>

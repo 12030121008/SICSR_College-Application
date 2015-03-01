@@ -1,0 +1,27 @@
+package com.sicsr.programme.viewholder;
+
+import com.sicsr.programme.R;
+
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.TextView;
+
+public class BranchesViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
+
+	public TextView branch_name;
+	public View branch_outer;
+	
+	public BranchesViewHolder(View root) {
+		super(root);
+		branch_name = (TextView) root.findViewById(R.id.name);
+		branch_outer  = (View) root.findViewById(R.id.branch_outer);
+	}
+
+	@Override
+	public void onClick(View v) {
+
+	
+	}
+
+}

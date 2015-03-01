@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:devfx="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/wrapper"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="1dp"
+    android:background="@color/fs_white"
+    android:descendantFocusability="blocksDescendants"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
+    android:orientation="horizontal" >
+
+    <RelativeLayout
+        android:id="@+id/summary_card_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10.0dip"
+        android:background="@color/fs_white"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:paddingBottom="13.0dip"
+        android:paddingTop="13.0dip" >
+
+        <CheckBox
+            android:id="@+id/chktopicStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5.0dip"
+            android:layout_marginRight="8.0dip"
+            android:checked="true"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/topicStatus"
+            android:capitalize="characters"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:textSize="@dimen/text_medium" />
+
+        <ImageView
+            android:id="@+id/imgbookmark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="14dp"
+            android:src="@drawable/abc_btn_check_to_on_mtrl_000" />
+    </RelativeLayout>
+
+</LinearLayout>
